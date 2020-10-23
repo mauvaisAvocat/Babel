@@ -101,7 +101,8 @@
                         android:text="AGREGAR AL CARRITO"
                         android:textSize="7dp"
                         android:background="#FFEB3B"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:onClick="btnCarrito"/>
 
                 </LinearLayout>
 
