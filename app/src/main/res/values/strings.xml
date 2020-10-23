@@ -21,6 +21,17 @@
     <string name="formato_fecha">dd/mm/yyyy</string>
     <string name="formato_hora">hh:mm</string>
     <string name="regresar">regresar</string>
+    <string name="Search">Buscar</string>
+    <string name="wish_list">Wish list</string>
+    <string name="carrito">Carrito</string>
+    <string name="productos">Productos</string>
+    <string name="cover">Cover</string>
+    <string name="agregar_al_carrito">Agregar al carrito</string>
+    <string name="quetza_tee_shirt">QUETZA - TEE SHIRT</string>
+    <string name="ver_detalles">Ver detalles</string>
+    <string name="agregar_al_wish_list">Agregar al Wish list</string>
+    <string name="copyright_2020_all_rights_reserved">Copyright © 2020 All rights reserved</string>
+    <string name="con_por_andrea_y_jama">⌨ con 💛 por Andrea y Jama</string>
 
     <string-array name="sexArray">
         <item>Masculino</item>
