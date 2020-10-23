@@ -1,6 +1,7 @@
 package com.example.babel;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -84,5 +85,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //Muestro el widget
         recogerFecha.show();
 
+    }
+
+    public void btnRegisterToMain(View v) {
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

@@ -17,11 +17,7 @@ public class Products extends AppCompatActivity {
 
     }
 
-    public void btnDetails(View v){
-        startActivity(
-                new Intent(
-                        Products.this, Details.class
-                )
-        );
+    public void btnDetails(View v) {
+        startActivity(new Intent(Products.this, Details.class));
     }
 }
