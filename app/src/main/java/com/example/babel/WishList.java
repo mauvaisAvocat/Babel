@@ -13,7 +13,7 @@ public class WishList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-    public void btnContinuar(View v){
+    public void btnContinuar(View v) {
         startActivity(
                 new Intent(
                         WishList.this, Products.class

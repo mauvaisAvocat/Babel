@@ -29,4 +29,8 @@ public class MainActivity extends AppCompatActivity {
     public void btnMainRegister(View v) {
         startActivity(new Intent(this, RegisterActivity.class));
     }
+
+    public void btnMainWishList(View v) {
+        startActivity(new Intent(this, WishList.class));
+    }
 }

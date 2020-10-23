@@ -93,6 +93,7 @@
                         android:layout_weight="0.5"
                         android:background="@color/colorPrimaryDark"
                         android:enabled="true"
+                        android:onClick="btnMainWishList"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
                         android:text="@string/wish_list"
