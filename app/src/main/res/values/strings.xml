@@ -1,8 +1,45 @@
 <resources>
     <string name="app_name">Babel</string>
+    <string name="title_activity_login">Iniciar sesión</string>
+    <string name="prompt_email">Correo electrónico</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Iniciar sesión</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="welcome">Bienvenido!</string>
+    <string name="invalid_username">Nombre de usuario invalido</string>
+    <string name="invalid_password">El password debe de ser más grande</string>
+    <string name="login_failed">Ups! hubo un error!</string>
+    <string name="babel_logo_description">Babel logo</string>
+    <string name="register">Registrar</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="namesHint">Nombre(s)</string>
+    <string name="middleNAme">Apellido paterno</string>
+    <string name="apellido_materno">Apellido materno</string>
+    <string name="titlulo_pickers">Obtener fecha y hora</string>
+    <string name="formato_fecha">dd/mm/yyyy</string>
+    <string name="formato_hora">hh:mm</string>
+    <string name="regresar">regresar</string>
+    <string name="Search">Buscar</string>
+    <string name="wish_list">Wish list</string>
+    <string name="carrito">Carrito</string>
+    <string name="productos">Productos</string>
+    <string name="cover">Cover</string>
+    <string name="agregar_al_carrito">Agregar al carrito</string>
+    <string name="quetza_tee_shirt">QUETZA - TEE SHIRT</string>
+    <string name="ver_detalles">Ver detalles</string>
+    <string name="agregar_al_wish_list">Agregar al Wish list</string>
+    <string name="copyright_2020_all_rights_reserved">Copyright © 2020 All rights reserved</string>
+    <string name="con_por_andrea_y_jama">⌨ con 💛 por Andrea y Jama</string>
+
     <string-array name="sizes_array">
         <item>CH</item>
         <item>M</item>
         <item>G</item>
+    </string-array>
+
+    <string-array name="sexArray">
+        <item>Masculino</item>
+        <item>Femenino</item>
+        <item>Indefinido</item>
     </string-array>
 </resources>
