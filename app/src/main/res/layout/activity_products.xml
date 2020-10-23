@@ -37,6 +37,7 @@
             android:padding="10dp">
 
             <Button
+                android:id="@+id/btn1"
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
@@ -51,7 +52,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
-                android:background="@drawable/shirt2"/>
+                android:background="@drawable/shirt2"
+                android:onClick="btnDetails"/>
 
         </LinearLayout>
 
@@ -69,7 +71,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
-                android:background="@drawable/shirt3"/>
+                android:background="@drawable/shirt3"
+                android:onClick="btnDetails"/>
 
             <LinearLayout
                 android:layout_width="1dp"
@@ -80,7 +83,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
-                android:background="@drawable/shirt4"/>
+                android:background="@drawable/shirt4"
+                android:onClick="btnDetails"/>
 
         </LinearLayout>
 
@@ -98,7 +102,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
-                android:background="@drawable/shirt7"/>
+                android:background="@drawable/shirt7"
+                android:onClick="btnDetails"/>
 
             <LinearLayout
                 android:layout_width="1dp"
@@ -109,7 +114,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
-                android:background="@drawable/shirt8"/>
+                android:background="@drawable/shirt8"
+                android:onClick="btnDetails"/>
 
         </LinearLayout>
 
@@ -127,7 +133,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
-                android:background="@drawable/shirt9"/>
+                android:background="@drawable/shirt9"
+                android:onClick="btnDetails"/>
 
             <LinearLayout
                 android:layout_width="1dp"
@@ -138,7 +145,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
-                android:background="@drawable/shirt10"/>
+                android:background="@drawable/shirt10"
+                android:onClick="btnDetails"/>
 
         </LinearLayout>
 
@@ -156,7 +164,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
-                android:background="@drawable/shirt11"/>
+                android:background="@drawable/shirt11"
+                android:onClick="btnDetails"/>
 
             <LinearLayout
                 android:layout_width="1dp"
@@ -167,7 +176,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
-                android:background="@drawable/shirt12"/>
+                android:background="@drawable/shirt12"
+                android:onClick="btnDetails"/>
 
         </LinearLayout>
 
@@ -185,7 +195,8 @@
                 android:layout_width="1dp"
                 android:layout_height="222dp"
                 android:layout_weight="5.75"
-                android:background="@drawable/shirt5"/>
+                android:background="@drawable/shirt5"
+                android:onClick="btnDetails"/>
 
             <LinearLayout
                 android:layout_width="1dp"
@@ -196,7 +207,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
-                android:background="@drawable/shirt6"/>
+                android:background="@drawable/shirt6"
+                android:onClick="btnDetails"/>
 
         </LinearLayout>
 
