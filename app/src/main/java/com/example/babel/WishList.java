@@ -11,9 +11,10 @@ public class WishList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_wish_list);
     }
 
-    public void btnContinuar(View v) {
+    public void btnContinuar(View v){
         startActivity(
                 new Intent(
                         WishList.this, Products.class
