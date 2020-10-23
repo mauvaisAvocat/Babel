@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Babel</string>
+    <string name="title_activity_login">Iniciar sesión</string>
+    <string name="prompt_email">Correo electrónico</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Iniciar sesión</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="welcome">Bienvenido!</string>
+    <string name="invalid_username">Nombre de usuario invalido</string>
+    <string name="invalid_password">El password debe de ser más grande</string>
+    <string name="login_failed">Ups! hubo un error!</string>
+    <string name="babel_logo_description">Babel logo</string>
+    <string name="register">Registrar</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="namesHint">Nombre(s)</string>
+    <string name="middleNAme">Apellido paterno</string>
+    <string name="apellido_materno">Apellido materno</string>
+
+    <string name="titlulo_pickers">Obtener fecha y hora</string>
+
+    <string name="formato_fecha">dd/mm/yyyy</string>
+    <string name="formato_hora">hh:mm</string>
+    <string name="regresar">regresar</string>
+
+    <string-array name="sexArray">
+        <item>Masculino</item>
+        <item>Femenino</item>
+        <item>Indefinido</item>
+    </string-array>
 </resources>
