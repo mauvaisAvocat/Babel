@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Products">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +41,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.75"
-                android:background="@drawable/bobsponja"/>
+                android:background="@drawable/bobsponja"
+                android:onClick="btnDetails"/>
 
             <LinearLayout
                 android:layout_width="1dp"
