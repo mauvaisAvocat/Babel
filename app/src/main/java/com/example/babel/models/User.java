@@ -11,7 +11,6 @@ public class User {
     private String birthdate;
     private String rfc;
     private String created_at;
-    private Sex sex;
     private String stripe_id;
     private String token;
 
@@ -109,13 +108,5 @@ public class User {
 
     public void setPhone(double phone) {
         this.phone = phone;
-    }
-
-    public Sex getSex() {
-        return sex;
-    }
-
-    public void setSex(Sex sex) {
-        this.sex = sex;
     }
 }
