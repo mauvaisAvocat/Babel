@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,14 +23,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText etEmail;
+    private final String URL = "https://babel-tee.azurewebsites.net/api/v1/login";
+
+    /* Componentes gráficos (xml) */
+    private EditText etName;
     private EditText etPassword;
+    private Button btnRegister;
+    private Button btnLogin;
     private AlertDialog.Builder alert;
 
-    private RequestQueue requestQueue;
-    private StringRequest stringRequest;
-
-    private final String URL = "https://babel-tee.azurewebsites.net/api/v1/login";
+    /* Elementos conexión remota  */
+    private RequestQueue servConection;
+    private StringRequest servRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -45,13 +45,13 @@ public class Details extends AppCompatActivity {
     }
 
     public void btnPago(View v) {
-        if (imgCard.getVisibility() == View.INVISIBLE && tvPago.getVisibility() == View.INVISIBLE) {
+        if (imgCard.getVisibility() == View.INVISIBLE && tvPago.getVisibility() == View.INVISIBLE || imgCard.getVisibility() == View.GONE && tvPago.getVisibility() == View.GONE) {
             imgCard.setVisibility(View.VISIBLE);
             tvPago.setVisibility(View.VISIBLE);
 
         } else {
-            imgCard.setVisibility(View.INVISIBLE);
-            tvPago.setVisibility(View.INVISIBLE);
+            imgCard.setVisibility(View.GONE);
+            tvPago.setVisibility(View.GONE);
         }
 
     }

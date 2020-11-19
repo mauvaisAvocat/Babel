@@ -28,7 +28,6 @@ public class RegisterActivity extends AppCompatActivity {
     // Componentes de la vista de Layout
     private LinearLayout llSurname;
     private LinearLayout llPassword;
-
     private EditText etName;
     private EditText etmiddleName;
     private EditText etsurName;
