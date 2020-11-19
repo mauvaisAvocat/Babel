@@ -10,11 +10,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,11 +39,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     final int anio = c.get(Calendar.YEAR);
 
     //Widgets
-    EditText etFecha;
-    ImageButton ibObtenerFecha;
+    private EditText etFecha;
+    private ImageButton ibObtenerFecha;
 
     // Componentes de la vista de Layout
-    private ConstraintLayout constraintLayoutFormulary;
+    private LinearLayout llSurname;
+    private LinearLayout llPassword;
     private EditText etName;
     private EditText etmiddleName;
     private EditText etsurName;
@@ -64,15 +65,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        constraintLayoutFormulary   = findViewById(R.id.res_container);
+        llSurname                   = findViewById(R.id.apellidosDiv);
+        llPassword                  = findViewById(R.id.passwordsContainer);
         etName                      = findViewById(R.id.username);
         etmiddleName                = findViewById(R.id.middleName);
         etsurName                   = findViewById(R.id.lastName);
         etEmail                     = findViewById(R.id.email);
         etPassword                  = findViewById(R.id.password);
         etConfirmPass               = findViewById(R.id.confirmPassword);
-        btnRegister                 = findViewById(R.id.loginButton);
-        btnBackMian                 = findViewById(R.id.registerButton);
+        btnRegister                 = findViewById(R.id.login);
+        btnBackMian                 = findViewById(R.id.register);
 
         //Widget EditText donde se mostrara la fecha obtenida
         etFecha = (EditText) findViewById(R.id.et_mostrar_fecha_picker);
@@ -131,18 +133,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void btnRegisterToMain(View v) {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
     }
 
     public void btnRegisterDB(View v){
         /*TODO VALIDAR QUE EL PASSWORD SEA IGUAL AL CONFIRM PASSWORD*/
 
         /* Ocultamos los datos del formulario */
-        constraintLayoutFormulary.setVisibility(View.GONE);
+        etName.setVisibility(View.GONE);
+        llSurname.setVisibility(View.GONE);
+        etFecha.setVisibility(View.GONE);
+        ibObtenerFecha.setVisibility(View.GONE);
+        spinner.setVisibility(View.GONE);
+        etEmail.setVisibility(View.GONE);
+        llPassword.setVisibility(View.GONE);
+
 
         /* Invalidamos los botones */
-        btnRegister.setEnabled(false);
-        btnBackMian.setEnabled(false);
+        //btnRegister.setEnabled(false);
+        //btnBackMian.setEnabled(false);
 
        /*
        PETICIÓN DE VOLLEY
@@ -155,11 +164,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         seryRequest = new StringRequest(
                 Request.Method.POST,
                 "https://babel-tee.azurewebsites.net/api/v1/register",
-                response -> {
-                    /*if (Integer.parseInt(response) == 201){
-
-                    }*/
-                    Toast.makeText(RegisterActivity.this, "RESP: " + response, Toast.LENGTH_SHORT).show();
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(RegisterActivity.this, "RESP: " + response, Toast.LENGTH_SHORT).show();
+                    }
                 },
                 new Response.ErrorListener() {
                     @Override
