@@ -239,14 +239,14 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/register"
-                android:onClick="btnRegister"
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/register"
                 app:layout_constraintTop_toBottomOf="@+id/passwordsContainer"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:onClick="btnRegisterDB"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

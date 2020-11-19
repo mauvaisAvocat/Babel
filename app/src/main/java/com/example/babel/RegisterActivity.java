@@ -71,8 +71,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         etEmail                     = findViewById(R.id.email);
         etPassword                  = findViewById(R.id.password);
         etConfirmPass               = findViewById(R.id.confirmPassword);
-        btnRegister                 = findViewById(R.id.register);
-        btnBackMian                 = findViewById(R.id.login);
+        btnRegister                 = findViewById(R.id.loginButton);
+        btnBackMian                 = findViewById(R.id.registerButton);
 
         //Widget EditText donde se mostrara la fecha obtenida
         etFecha = (EditText) findViewById(R.id.et_mostrar_fecha_picker);
@@ -134,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         startActivity(new Intent(this, MainActivity.class));
     }
 
-    public void btnRegister(View v){
+    public void btnRegisterDB(View v){
         /*TODO VALIDAR QUE EL PASSWORD SEA IGUAL AL CONFIRM PASSWORD*/
 
         /* Ocultamos los datos del formulario */
@@ -158,13 +158,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(RegisterActivity.this, response, Toast.LENGTH_SHORT).show();
+                        /*if (Integer.parseInt(response) == 201){
+
+                        }*/
+                        Toast.makeText(RegisterActivity.this, "RESP: " + response, Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "ERR: " + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
