@@ -2,6 +2,7 @@ package com.example.babel;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +13,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,6 +25,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -67,12 +70,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         llSurname                   = findViewById(R.id.apellidosDiv);
         llPassword                  = findViewById(R.id.passwordsContainer);
-        etName                      = findViewById(R.id.username);
-        etmiddleName                = findViewById(R.id.middleName);
-        etsurName                   = findViewById(R.id.lastName);
-        etEmail                     = findViewById(R.id.email);
-        etPassword                  = findViewById(R.id.password);
-        etConfirmPass               = findViewById(R.id.confirmPassword);
+        etName                      = (EditText)findViewById(R.id.username);
+        etmiddleName                = (EditText)findViewById(R.id.middleName);
+        etsurName                   = (EditText)findViewById(R.id.lastName);
+        etEmail                     = (EditText)findViewById(R.id.email);
+        etPassword                  = (EditText)findViewById(R.id.password);
+        etConfirmPass               = (EditText)findViewById(R.id.confirmPassword);
         btnRegister                 = findViewById(R.id.login);
         btnBackMian                 = findViewById(R.id.register);
 
@@ -150,8 +153,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
         /* Invalidamos los botones */
-        //btnRegister.setEnabled(false);
-        //btnBackMian.setEnabled(false);
+        btnRegister.setEnabled(false);
+        btnBackMian.setEnabled(false);
 
        /*
        PETICIÓN DE VOLLEY
@@ -167,16 +170,84 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(RegisterActivity.this, "RESP: " + response, Toast.LENGTH_SHORT).show();
+                        /* Si el servidor responde 201 */
+                        if (Integer.parseInt(response) == 201){
+                            alert.setTitle("Bienvenido")
+                                    .setMessage("Registro completado")
+                                    .setNeutralButton("Continuar", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            startActivity(
+                                                    new Intent(
+                                                            RegisterActivity.this,
+                                                            LoginActivity.class
+                                                    )
+                                            );
+                                        }
+                                    })
+                                    .setCancelable(false)
+                                    .setIcon(R.drawable.babellogo)
+                                    .show();
+                        }
+                        /* Si fue otra cosa responder 401 */
+                        if (Integer.parseInt(response) == 401){
+                            alert.setTitle("ERROR")
+                                    .setMessage(response)
+                                    .setNeutralButton("Aceptar", null)
+                                    .setCancelable(false)
+                                    .setIcon(R.drawable.babellogo)
+                                    .show();
+                        }
+                        etName.setVisibility(View.VISIBLE);
+                        llSurname.setVisibility(View.VISIBLE);
+                        etFecha.setVisibility(View.VISIBLE);
+                        ibObtenerFecha.setVisibility(View.VISIBLE);
+                        spinner.setVisibility(View.VISIBLE);
+                        etEmail.setVisibility(View.VISIBLE);
+                        llPassword.setVisibility(View.VISIBLE);
+                        btnBackMian.setEnabled(true);
+                        btnRegister.setEnabled(true);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this, "ERR: " + error.toString(), Toast.LENGTH_SHORT).show();
+                        /* Mostramos el error que exista */
+                        alert.setTitle("ERROR INESPERADO")
+                                .setMessage(error.toString())
+                                .setNeutralButton("Aceptar", null)
+                                .setCancelable(false)
+                                .setIcon(R.drawable.babellogo)
+                                .show();
+                        etName.setVisibility(View.VISIBLE);
+                        llSurname.setVisibility(View.VISIBLE);
+                        etFecha.setVisibility(View.VISIBLE);
+                        ibObtenerFecha.setVisibility(View.VISIBLE);
+                        spinner.setVisibility(View.VISIBLE);
+                        etEmail.setVisibility(View.VISIBLE);
+                        llPassword.setVisibility(View.VISIBLE);
+                        btnBackMian.setEnabled(true);
+                        btnRegister.setEnabled(true);
                     }
                 }
-        );
+        )
+        {
+            /* Enviamos los parámetros a PHP con los nombres y valores que el servicio que necesite */
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params =  new HashMap<>();
+                /* Usando el método put vamos a indicar las variables del servicio */
+                params.put("name", etName.getText().toString());
+                params.put("ap", etmiddleName.getText().toString());
+                params.put("am", etsurName.getText().toString());
+                params.put("email", etEmail.getText().toString());
+                params.put("password", etPassword.getText().toString());
+                params.put("birthday", etFecha.getText().toString());
+                String id_sex = String.valueOf(spinner.getSelectedItemPosition());
+                params.put("sex_id", id_sex);
+                return params;
+            }
+        };
         /* Ejecutamos la petición desde el servidor */
         seryConection.add(seryRequest);
     }
