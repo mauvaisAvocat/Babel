@@ -55,7 +55,7 @@ public class ProductAdapter extends BaseAdapter {
             tvName.setText(data.get(position).getNombre());
             tvPrice.setText("$" + data.get(position).getPrecio());
 
-            Picasso.with(context)
+            Picasso.get()
                     .load(data.get(position).getUrlImagen())
                     .placeholder(R.drawable.relojarena)
                     .error(R.drawable.nube)

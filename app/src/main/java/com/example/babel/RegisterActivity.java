@@ -155,14 +155,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         seryRequest = new StringRequest(
                 Request.Method.POST,
                 "https://babel-tee.azurewebsites.net/api/v1/register",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        /*if (Integer.parseInt(response) == 201){
+                response -> {
+                    /*if (Integer.parseInt(response) == 201){
 
-                        }*/
-                        Toast.makeText(RegisterActivity.this, "RESP: " + response, Toast.LENGTH_SHORT).show();
-                    }
+                    }*/
+                    Toast.makeText(RegisterActivity.this, "RESP: " + response, Toast.LENGTH_SHORT).show();
                 },
                 new Response.ErrorListener() {
                     @Override
