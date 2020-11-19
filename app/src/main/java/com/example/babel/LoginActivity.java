@@ -1,5 +1,7 @@
 package com.example.babel;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
+    private AlertDialog.Builder alert;
 
     private RequestQueue requestQueue;
     private StringRequest stringRequest;
@@ -35,6 +38,9 @@ public class LoginActivity extends AppCompatActivity {
 
         etEmail = findViewById(R.id.usernameLogin);
         etPassword = findViewById(R.id.passwordLogin);
+
+        alert = new AlertDialog.Builder(LoginActivity.this);
+
 
         requestQueue = Volley.newRequestQueue(LoginActivity.this);
 
@@ -51,7 +57,23 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
+                        alert.setTitle("Bienvenido")
+                                .setMessage(response)
+                                .setNeutralButton("Continuar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        startActivity(
+                                                new Intent(
+                                                        LoginActivity.this,
+                                                        MainActivity.class
+                                                )
+                                        );
+                                    }
+                                })
+                                .setCancelable(false)
+                                .setIcon(R.drawable.babellogo)
+                                .show();
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -60,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
-        ){
+        ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
