@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.babel.ProductList;
@@ -45,6 +46,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =  LayoutInflater.from(parent.getContext())
@@ -56,7 +58,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvNameProduct.setText(localDataSet.get(position).getNameProduct());
         holder.tvPriceProduct.setText("$" + localDataSet.get(position).getPrecio_prod());
-        Picasso.with(context)
+        Picasso.get()
                 .load(localDataSet.get(position).getImage())
                 .placeholder(R.drawable.relojarena)
                 .error(R.drawable.nube)

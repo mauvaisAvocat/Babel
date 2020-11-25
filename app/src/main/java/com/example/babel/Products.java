@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,10 +21,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.babel.Tools.ANSI_RESET;
+import static com.example.babel.Tools.ANSI_YELLOW;
+
 public class Products extends AppCompatActivity implements Callback<ArrayList<ProductList>> {
 
     private SwipeRefreshLayout strProduct;
-    private RecyclerView recyclerView;
     private ProductsAdapter adapter;
 
 
@@ -33,7 +36,7 @@ public class Products extends AppCompatActivity implements Callback<ArrayList<Pr
         setContentView(R.layout.activity_products);
 
         strProduct = findViewById(R.id.srl_product);
-        recyclerView = (RecyclerView) findViewById(R.id.recycle_view_products);
+        RecyclerView recyclerView = findViewById(R.id.recycle_view_products);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -45,12 +48,16 @@ public class Products extends AppCompatActivity implements Callback<ArrayList<Pr
         Call<ArrayList<ProductList>> call = ProductVetApiAdapter.getApiService().getProducts();
         call.enqueue(this);
 
-        strProduct.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Quitamos loader
-                strProduct.setRefreshing(false);
-            }
+        Tools.cleanScreen();
+        System.out.println(ANSI_YELLOW + "caca 1........................................" + ANSI_RESET);
+        System.out.println(call.toString());
+
+        strProduct.setOnRefreshListener(() -> {
+            Tools.cleanScreen();
+            System.out.println(ANSI_YELLOW + "refresh 1........................................" + ANSI_RESET);
+
+            // Quitamos loader
+            strProduct.setRefreshing(false);
         });
     }
 
@@ -59,16 +66,23 @@ public class Products extends AppCompatActivity implements Callback<ArrayList<Pr
     }
 
     @Override
-    public void onResponse(Call<ArrayList<ProductList>> call, Response<ArrayList<ProductList>> response) {
+    public void onResponse(@NonNull Call<ArrayList<ProductList>> call, Response<ArrayList<ProductList>> response) {
+        Tools.cleanScreen();
+        System.out.println(ANSI_YELLOW + "OnResponse........................................" + ANSI_RESET);
+
+
         if (response.isSuccessful()){
             ArrayList<ProductList> products = response.body();
+            assert products != null;
             Log.d("onRespondeProducts", "Size of products => " + products.size());
             adapter.setDataSet(products);
         }
     }
 
     @Override
-    public void onFailure(Call<ArrayList<ProductList>> call, Throwable t) {
+    public void onFailure(@NonNull Call<ArrayList<ProductList>> call, @NonNull Throwable t) {
+        Tools.cleanScreen();
+        System.out.println(ANSI_YELLOW + "OnFailure........................................" + ANSI_RESET);
 
     }
 }
