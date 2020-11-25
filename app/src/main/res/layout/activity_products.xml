@@ -11,28 +11,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
         <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:background="#4C4949"
-                android:padding="16dp"
-                android:src="@drawable/babellogo" />
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="#4C4949"
+            android:padding="16dp"
+            android:src="@drawable/babellogo" />
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Lista de productos"
-                android:textAlignment="center"
-                android:textSize="40dp"
-                android:textStyle="bold" />
-
-        <ListView
-            android:layout_marginTop="10dp"
-            android:id="@+id/lv_products"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Lista de productos"
+            android:textAlignment="center"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_products"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
     </LinearLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

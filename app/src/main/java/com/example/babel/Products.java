@@ -1,22 +1,30 @@
+
 package com.example.babel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.babel.io.ProductVetApiAdapter;
+import com.example.babel.ui.adapter.ProductsAdapter;
+
 import java.util.ArrayList;
-import java.util.List;
 
-public class Products extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    private ListView lvProduct;
+public class Products extends AppCompatActivity implements Callback<ArrayList<ProductList>> {
+
     private SwipeRefreshLayout strProduct;
-    private List<ProductList> collection;
-    private ProductAdapter adapter;
+    private RecyclerView recyclerView;
+    private ProductsAdapter adapter;
 
 
     @Override
@@ -24,26 +32,18 @@ public class Products extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
-        lvProduct = findViewById(R.id.lv_products);
         strProduct = findViewById(R.id.srl_product);
+        recyclerView = (RecyclerView) findViewById(R.id.recycle_view_products);
+        recyclerView.setHasFixedSize(true);
 
-        collection = new ArrayList<>();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
-        for (int i = 0; i  < 12; i++){
-            ProductList pl = new ProductList();
-            pl.setUrlImagen("https://nosomosnonos.com/wp-content/uploads/2019/11/Bob-Esponja-al-rescate.jpg");
-            pl.setNombre("BOB SQUAREPANTS | BABEL TEE-SHIRT");
-            pl.setPrecio(350);
-            collection.add(pl);
-        }
-        /*
-        Inicializamos el adaptador
-         */
-        adapter = new ProductAdapter(
-                Products.this,
-                collection
-        );
-        lvProduct.setAdapter(adapter);
+        adapter = new ProductsAdapter(this);
+        recyclerView.setAdapter(adapter);
+
+        Call<ArrayList<ProductList>> call = ProductVetApiAdapter.getApiService().getProducts();
+        call.enqueue(this);
 
         strProduct.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -56,5 +56,19 @@ public class Products extends AppCompatActivity {
 
     public void btnDetails(View v) {
         startActivity(new Intent(Products.this, Details.class));
+    }
+
+    @Override
+    public void onResponse(Call<ArrayList<ProductList>> call, Response<ArrayList<ProductList>> response) {
+        if (response.isSuccessful()){
+            ArrayList<ProductList> products = response.body();
+            Log.d("onRespondeProducts", "Size of products => " + products.size());
+            adapter.setDataSet(products);
+        }
+    }
+
+    @Override
+    public void onFailure(Call<ArrayList<ProductList>> call, Throwable t) {
+
     }
 }

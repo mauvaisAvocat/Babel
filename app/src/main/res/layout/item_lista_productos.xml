@@ -19,7 +19,7 @@
         android:layout_weight="6">
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_name_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="_NOMBRE_"
@@ -31,7 +31,7 @@
             android:textAlignment="textEnd"/>
 
         <TextView
-            android:id="@+id/tv_price"
+            android:id="@+id/tv_price_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="$"
