@@ -32,6 +32,9 @@ public class Details extends AppCompatActivity implements Callback<ArrayList<Det
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        Intent intent = getIntent();
+        int product_id = (int)intent.getDoubleExtra("product_id", 1);
+
         RecyclerView recyclerView = findViewById(R.id.recycle_view_details);
         recyclerView.setHasFixedSize(true);
 
@@ -41,11 +44,10 @@ public class Details extends AppCompatActivity implements Callback<ArrayList<Det
         adapter = new DetailsAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        Call<ArrayList<DetailProduct>> call = ProductVetApiAdapter.getApiService().getDetails();
-        call.enqueue(this);
 
-        Intent intent = getIntent();
-        int product_id = (int)intent.getDoubleExtra("product_id", 0);
+        System.out.println(product_id);
+        Call<ArrayList<DetailProduct>> call = ProductVetApiAdapter.getApiService().getDetails(product_id);
+        call.enqueue(this);
         tvPago = (TextView) findViewById(R.id.pago_tv);
         imgCard = (ImageView) findViewById(R.id.card_img);
         tvPago.setText("Contamos pagos en linea de la más alta seguridad a través de Stripe, " +
