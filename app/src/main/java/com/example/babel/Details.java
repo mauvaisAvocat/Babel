@@ -21,9 +21,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.babel.Tools.ANSI_RESET;
-import static com.example.babel.Tools.ANSI_YELLOW;
-
 public class Details extends AppCompatActivity implements Callback<ArrayList<DetailProduct>> {
 
     private DetailsAdapter adapter;
@@ -48,6 +45,8 @@ public class Details extends AppCompatActivity implements Callback<ArrayList<Det
         Call<ArrayList<DetailProduct>> call = ProductVetApiAdapter.getApiService().getDetails();
         call.enqueue(this);
 
+        Intent intent = getIntent();
+        int product_id = (int)intent.getDoubleExtra("product_id", 0);
         tvPago = (TextView) findViewById(R.id.pago_tv);
         imgCard = (ImageView) findViewById(R.id.card_img);
         tvPago.setText("Contamos pagos en linea de la más alta seguridad a través de Stripe, " +

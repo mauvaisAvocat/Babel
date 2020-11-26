@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class Products extends AppCompatActivity implements Callback<ArrayList<Pr
 
     private SwipeRefreshLayout strProduct;
     private ProductsAdapter adapter;
+    private TextView tvIdProduct;
 
 
     @Override
@@ -35,6 +37,7 @@ public class Products extends AppCompatActivity implements Callback<ArrayList<Pr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
+        tvIdProduct = findViewById(R.id.tv_details_id);
         strProduct = findViewById(R.id.srl_product);
         RecyclerView recyclerView = findViewById(R.id.recycle_view_products);
         recyclerView.setHasFixedSize(true);
@@ -62,7 +65,10 @@ public class Products extends AppCompatActivity implements Callback<ArrayList<Pr
     }
 
     public void btnDetails(View v) {
-        startActivity(new Intent(Products.this, Details.class));
+        Intent i = new Intent(Products.this, Details.class);
+        //i.putExtra("id_product", tvIdProduct.getText().toString());
+        startActivity(i);
+        //startActivity(new Intent(Products.this, Details.class));
     }
 
     @Override

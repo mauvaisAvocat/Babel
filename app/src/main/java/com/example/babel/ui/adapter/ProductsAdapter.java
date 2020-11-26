@@ -1,15 +1,18 @@
 package com.example.babel.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.babel.Details;
 import com.example.babel.ProductList;
 import com.example.babel.R;
 import com.squareup.picasso.Picasso;
@@ -26,12 +29,14 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         private TextView tvNameProduct;
         private TextView tvPriceProduct;
         private ImageView imgProduct;
+        private Button btnMore;
 
         public ViewHolder(View v) {
             super(v);
             tvNameProduct = (TextView) v.findViewById(R.id.tv_name_product);
             tvPriceProduct = (TextView) v.findViewById(R.id.tv_price_product);
             imgProduct = (ImageView) v.findViewById(R.id.img_product);
+            btnMore = (Button) v.findViewById(R.id.btn_more_information);
         }
     }
 
@@ -62,7 +67,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
                 .load(localDataSet.get(position).getImage())
                 .placeholder(R.drawable.relojarena)
                 .error(R.drawable.nube)
+                .fit()
                 .into(holder.imgProduct);
+        holder.btnMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, Details.class);
+                i.putExtra("product_id", localDataSet.get(position).getId());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
