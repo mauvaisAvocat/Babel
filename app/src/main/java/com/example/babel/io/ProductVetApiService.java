@@ -1,7 +1,7 @@
 package com.example.babel.io;
 
 import com.example.babel.ProductList;
-import com.example.babel.ui.adapter.DetailProduct;
+import com.example.babel.DetailProduct;
 
 import java.util.ArrayList;
 

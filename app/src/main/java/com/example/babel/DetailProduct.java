@@ -1,4 +1,4 @@
-package com.example.babel.ui.adapter;
+package com.example.babel;
 
 public class DetailProduct {
     private double id;

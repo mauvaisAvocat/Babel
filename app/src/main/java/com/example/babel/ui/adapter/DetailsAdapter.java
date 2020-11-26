@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.babel.DetailProduct;
 import com.example.babel.R;
 import com.squareup.picasso.Picasso;
 

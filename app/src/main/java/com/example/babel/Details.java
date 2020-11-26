@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.babel.io.ProductVetApiAdapter;
-import com.example.babel.ui.adapter.DetailProduct;
 import com.example.babel.ui.adapter.DetailsAdapter;
 
 import java.util.ArrayList;
