@@ -30,6 +30,9 @@
     <string name="agregar_al_wish_list">Agregar al Wish list</string>
     <string name="copyright_2020_all_rights_reserved">Copyright © 2020 All rights reserved</string>
     <string name="con_por_andrea_y_jama">⌨ con 💛 por Andrea y Jama</string>
+    <string name="m_s">Más</string>
+    <string name="peos">$</string>
+    <string name="nombre">_NOMBRE_</string>
 
     <string-array name="sizes_array">
         <item>CH</item>

@@ -14,4 +14,6 @@ public interface ProductVetApiService {
 
     @GET("details/products/1")
     Call<ArrayList<DetailProduct>> getDetails();
+
+
 }
