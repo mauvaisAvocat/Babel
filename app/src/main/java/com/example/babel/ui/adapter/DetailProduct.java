@@ -1,7 +1,7 @@
 package com.example.babel.ui.adapter;
 
 public class DetailProduct {
-    private int id;
+    private double id;
     private String nameProduct;
     private String description_prod;
     private double costo_prod;
@@ -9,14 +9,14 @@ public class DetailProduct {
     private double descuento;
     private String material_prod;
     private String image;
-    private int existence_s;
-    private int existence_m;
-    private int existence_l;
+    private double existence_s;
+    private double existence_m;
+    private double existence_l;
     private String status;
     private String category;
     private String provider;
 
-    public int getId() {
+    public double getId() {
         return id;
     }
 
@@ -80,7 +80,7 @@ public class DetailProduct {
         this.image = image;
     }
 
-    public int getExistence_s() {
+    public double getExistence_s() {
         return existence_s;
     }
 
@@ -88,7 +88,7 @@ public class DetailProduct {
         this.existence_s = existence_s;
     }
 
-    public int getExistence_m() {
+    public double getExistence_m() {
         return existence_m;
     }
 
@@ -96,7 +96,7 @@ public class DetailProduct {
         this.existence_m = existence_m;
     }
 
-    public int getExistence_l() {
+    public double getExistence_l() {
         return existence_l;
     }
 

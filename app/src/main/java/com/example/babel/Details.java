@@ -21,6 +21,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.babel.Tools.ANSI_RESET;
+import static com.example.babel.Tools.ANSI_YELLOW;
+
 public class Details extends AppCompatActivity implements Callback<ArrayList<DetailProduct>> {
 
     private DetailsAdapter adapter;
@@ -101,6 +104,7 @@ public class Details extends AppCompatActivity implements Callback<ArrayList<Det
 
     @Override
     public void onFailure(Call<ArrayList<DetailProduct>> call, Throwable t) {
-
+        System.out.println("OnFailure........................................");
+        System.out.println(t.getMessage());
     }
 }
