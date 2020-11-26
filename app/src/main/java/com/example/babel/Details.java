@@ -33,7 +33,7 @@ public class Details extends AppCompatActivity implements Callback<ArrayList<Det
         setContentView(R.layout.activity_details);
 
         Intent intent = getIntent();
-        int product_id = (int)intent.getDoubleExtra("product_id", 1);
+        int product_id = intent.getIntExtra("product_id", 1);
 
         RecyclerView recyclerView = findViewById(R.id.recycle_view_details);
         recyclerView.setHasFixedSize(true);

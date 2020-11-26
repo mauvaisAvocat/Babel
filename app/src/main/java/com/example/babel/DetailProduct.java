@@ -1,7 +1,7 @@
 package com.example.babel;
 
 public class DetailProduct {
-    private double id;
+    private int id;
     private String nameProduct;
     private String description_prod;
     private double costo_prod;
@@ -16,7 +16,7 @@ public class DetailProduct {
     private String category;
     private String provider;
 
-    public double getId() {
+    public int getId() {
         return id;
     }
 
