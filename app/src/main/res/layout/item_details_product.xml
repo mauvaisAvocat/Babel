@@ -47,7 +47,6 @@
                     android:text="BABEL | TEE-SHIRT"
                     android:textSize="14dp"
                     android:textStyle="bold"
-                    android:textAlignment="center"
                     android:layout_weight="4"/>
 
                 <TextView
