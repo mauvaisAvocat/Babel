@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="12"
+    android:background="#ECE8E8">
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_wishlist"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerInside"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="6">
+
+        <TextView
+            android:id="@+id/tv_wl_idproduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID: "
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:textAlignment="textEnd"/>
+
+        <TextView
+            android:id="@+id/tv_wl_nameproduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nombre"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:textAlignment="textEnd"/>
+
+        <TextView
+            android:id="@+id/tv_wl_priceproduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/peos"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:textAlignment="textEnd"/>
+
+        <TextView
+            android:id="@+id/tv_wl_descproduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DESCRIPTION: "
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_wl_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="BORRAR"
+            android:textColor="@color/mediumGray"
+            android:background="#E41231"/>
+
+    </LinearLayout>
+
+</LinearLayout>

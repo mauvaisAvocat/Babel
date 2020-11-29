@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Path;
 
 public interface ProductVetApiService {
@@ -19,7 +18,13 @@ public interface ProductVetApiService {
     @GET("details/products/{product_id}")
     Call<ArrayList<DetailProduct>> getDetails(@Path("product_id") int product_id);
 
-    @GET("/wishlist/")
-    Call<ArrayList<WishProduct>> getWishList(@Header("Authorization") String auth);
+    @GET("wishlist/")
+    Call<ArrayList<WishProduct>> getWishList();
+
+    @GET("wishlist/destroy/{id_product}")
+    Call<Void> getWishListDelete(@Path("id_product") int id_product);
+
+    @GET("wishlist/add/{product_id}")
+    Call<Void> addWishProduct(@Path("product_id") int product_id);
 
 }
