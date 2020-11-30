@@ -8,7 +8,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.babel.io.ProductVetApiAdapter;
 import com.example.babel.ui.adapter.WishListAdapter;
@@ -21,7 +20,7 @@ import retrofit2.Response;
 
 public class WishList extends AppCompatActivity {
     private WishListAdapter adapter;
-    private SwipeRefreshLayout srlWishList;
+    //private SwipeRefreshLayout srlWishList;
     private SharedPreferences preferences;
     private String token;
 
@@ -31,7 +30,7 @@ public class WishList extends AppCompatActivity {
         setContentView(R.layout.activity_wish_list);
         preferences = getSharedPreferences("babelapp", MODE_PRIVATE);
 
-        srlWishList = findViewById(R.id.srl_wishList);
+        //srlWishList = findViewById(R.id.srl_wishList);
         token = "Bearer " + preferences.getString("token", null);
         RecyclerView recyclerView = findViewById(R.id.recycle_view_wishlist);
         recyclerView.setHasFixedSize(true);
@@ -44,13 +43,13 @@ public class WishList extends AppCompatActivity {
 
         getWishList();
 
-       srlWishList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+       /*srlWishList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 srlWishList.setEnabled(false);
                 getWishList();
             }
-        });
+        });*/
 
     }
 
