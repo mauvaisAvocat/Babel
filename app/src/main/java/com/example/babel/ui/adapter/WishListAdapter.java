@@ -1,28 +1,33 @@
 package com.example.babel.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.babel.R;
-import com.example.babel.WishList;
 import com.example.babel.WishProduct;
+import com.example.babel.io.ProductVetApiAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHolder> {
 
     private ArrayList<WishProduct> localDataSet;
     private Context context;
+    private int id_product;
     //private LayoutInflater inflater;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -77,9 +82,21 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, WishList.class);
-                i.putExtra("id_product", localDataSet.get(position).getProduct_id());
-                context.startActivity(i);
+                id_product = localDataSet.get(position).getWishList_id();
+                Call<Void> call = ProductVetApiAdapter.getApiService().getWishListDelete(id_product);
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()){
+                            Toast.makeText(context, "Se ha eliminado de la WishList", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+
+                    }
+                });
             }
         });
     }

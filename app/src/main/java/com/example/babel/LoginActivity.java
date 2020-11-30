@@ -5,31 +5,28 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.babel.io.ProductVetApiAdapter;
 
-import java.util.HashMap;
-import java.util.Map;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private AlertDialog.Builder alert;
+    private String email;
+    private String password;
+    private Button btnLogin;
 
-    private RequestQueue requestQueue;
-    private StringRequest stringRequest;
+    /*private RequestQueue requestQueue;
+    private StringRequest stringRequest;*/
 
-    private final String URL = "https://babel-tee.azurewebsites.net/api/v1/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,59 +36,53 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.usernameLogin);
         etPassword = findViewById(R.id.passwordLogin);
 
+
         alert = new AlertDialog.Builder(LoginActivity.this);
+        btnLogin = (Button) findViewById(R.id.login);
 
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getUser();
+            }
+        });
+    }
 
-        requestQueue = Volley.newRequestQueue(LoginActivity.this);
+    private void getUser(){
+        email = etEmail.getText().toString();
+        password = etPassword.getText().toString();
+        System.out.println(email + " " + password);
+        Call<Login> call = ProductVetApiAdapter.getApiService().getUser(email, password);
+        call.enqueue(new Callback<Login>() {
+            @Override
+            public void onResponse(Call<Login> call, Response<Login> response) {
+                if (response.isSuccessful()){
+                    Login user = response.body();
+                    alert.setTitle("WTF")
+                            .setMessage(user.toString())
+                            .setNeutralButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startActivity(
+                                            new Intent(
+                                                    LoginActivity.this, MainActivity.class
+                                            )
+                                    );
+                                }
+                            })
+                            .show();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Login> call, Throwable t) {
+
+            }
+        });
     }
 
     public void btnLoginToRegister(View v) {
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
-    public void btnLoginRequest(View v) {
-        stringRequest = new StringRequest(
-                Request.Method.POST,
-                URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        alert.setTitle("Bienvenido")
-                                .setMessage(response)
-                                .setNeutralButton("Continuar", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        startActivity(
-                                                new Intent(
-                                                        LoginActivity.this,
-                                                        MainActivity.class
-                                                )
-                                        );
-                                    }
-                                })
-                                .setCancelable(false)
-                                .setIcon(R.drawable.babellogo)
-                                .show();
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", etEmail.getText().toString());
-                params.put("password", etPassword.getText().toString());
-                return params;
-            }
-        };
-
-        requestQueue.add(stringRequest);
-    }
 }

@@ -96,7 +96,6 @@
                 android:paddingEnd="8dp"
                 android:text="@string/action_sign_in"
                 android:textColor="@color/colorPrimaryDark"
-                android:onClick="btnLoginRequest"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
