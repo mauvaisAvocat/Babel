@@ -1,6 +1,7 @@
 package com.example.babel.ui.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,8 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
     private ArrayList<WishProduct> localDataSet;
     private Context context;
     private int id_product;
+    private SharedPreferences preferences;
+    private String token;
     //private LayoutInflater inflater;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -52,6 +55,8 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
     public WishListAdapter(Context context){
         this.context = context;
         localDataSet = new ArrayList<>();
+        preferences = context.getSharedPreferences("babelapp", Context.MODE_PRIVATE);
+        token = "Bearer " + preferences.getString("token", null);
     }
 
     public void setDataSet(ArrayList<WishProduct> dataset){
@@ -83,7 +88,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 id_product = localDataSet.get(position).getWishList_id();
-                Call<Void> call = ProductVetApiAdapter.getApiService().getWishListDelete(id_product);
+                Call<Void> call = ProductVetApiAdapter.getApiService().getWishListDelete(id_product, token);
                 call.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {

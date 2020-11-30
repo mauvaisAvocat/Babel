@@ -3,6 +3,7 @@ package com.example.babel;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,10 +25,11 @@ public class LoginActivity extends AppCompatActivity {
     private String password;
     private Button btnLogin;
 
-    /*private RequestQueue requestQueue;
-    private StringRequest stringRequest;*/
+    /* Variable de preferencias locales */
+    private SharedPreferences preferences;
 
-
+    /* Editar las preferencias locales */
+    private SharedPreferences.Editor preferencesEditor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,20 @@ public class LoginActivity extends AppCompatActivity {
                 getUser();
             }
         });
+
+        /* Si ya existe algun valor en las preferencias locales enviamos al home */
+        //preferences = getSharedPreferences("babelapp", MODE_PRIVATE);
+
+        /* Sino tenemos el valor de las preferencias, debemos indicar cual será el valor defecto */
+        /*int id = preferences.getInt("id", 0);
+        String token = preferences.getString("token", null);
+        if (id != 0 && token != null){
+            startActivity(
+                    new Intent(
+                            LoginActivity.this, MainActivity.class
+                    )
+            );
+        }*/
     }
 
     private void getUser(){
@@ -57,6 +73,18 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<Login> call, Response<Login> response) {
                 if (response.isSuccessful()){
                     Login user = response.body();
+                    /* Guardamos las preferencias de manera local
+                    * Las preferencias se guardan en un espacio de trabajo
+                    * 1. Nombre del espacio de trabajo
+                    * 2. Modo de uso (privado/ publico/ compartido) */
+                    preferences = getSharedPreferences("babelapp", MODE_PRIVATE);
+                    /* Editamos las preferencias dentro de mi espacio */
+                    preferencesEditor = preferences.edit();
+                    /* Agregamos el id y token del usuario en nuestro espacio de variables */
+                    preferencesEditor.putInt("id", user.getId());
+                    preferencesEditor.putString("token", user.getToken());
+                    /* Escribimos los cambios en el archivo de configuración */
+                    preferencesEditor.commit();
                     alert.setTitle("WTF")
                             .setMessage(user.toString())
                             .setNeutralButton("Aceptar", new DialogInterface.OnClickListener() {

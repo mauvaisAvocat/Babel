@@ -1,6 +1,7 @@
 package com.example.babel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -21,14 +22,17 @@ import retrofit2.Response;
 public class WishList extends AppCompatActivity {
     private WishListAdapter adapter;
     private SwipeRefreshLayout srlWishList;
+    private SharedPreferences preferences;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wish_list);
+        preferences = getSharedPreferences("babelapp", MODE_PRIVATE);
 
         srlWishList = findViewById(R.id.srl_wishList);
-        //String auth = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiYzY0NjAzMTk3MjFkNzhkZjMyMjc0YjY4YjQ1YzI3ZDU1NzMxOTBkOGNlYjJiMTc3YjUwZmI2YzI4OWE0YjNhZTQ5YTNlZDIyYjVmMmVlNWIiLCJpYXQiOjE2MDY2MDM3NTUsIm5iZiI6MTYwNjYwMzc1NSwiZXhwIjoxNjM4MTM5NzU1LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.etI7pS5Ydh_YrWXK-DczRxgqAV3J73-vS_xjmSMnfOedznibyGPdGzYs06XGFh6hWkqcVm0bHJuAadJNeCT7n2ZeWNghqBlp0MPX9x9Yw1pa9RJS_8tiWE22IRHUH2ymcmmZ29-X3l99SeBaFCWBv6JH3Mgb7CzJ7UY8paSfjIIX7M5RtGAr1bt1R5jZ1Ygw9zvVV-F-Y598xHeWr3GM8rig5WPzBeLbpebNfAl4c9ZwP1JfYH7TmNWgtmNezKmLnNwnoHyQAwk-_wqssZpMi56O9meku_Pwg0iNKktCgh1avXslVfbJ-T9_EbyXZwxwFCBqjF7ZhS0GxuMiWdUHS4rGOnilScScfuDEOvzUk3ZjHTmXvOExEWuZUoKEihPOdHUphB8KWdZa7aw0NVyV00b7YxmKECen77JTF0cLVk18xmjw7AASCP1oJQ9qotvqANcS612Nh6ZhvYb0ufXCMITXn_GazAdJxsyNroS0NSHSKtD3TQh3CGj4WuZws_Y47lNWy98m-yk7Ib8ctvd7JoEpii1-3oqP_rqq4Ht1UrUgWIO44MrF8aKYsEntWbalgUOgPlAuqldrvD6y7Z27F-2TcYHgBjyWatfLZqvBZ1AuXUoZtGMYbK9MrTWAWKKYT1T4ZdMFBp2iBflSkBxHgO9Qbkm_R2gm9e9Kphy_1MQ";
+        token = "Bearer " + preferences.getString("token", null);
         RecyclerView recyclerView = findViewById(R.id.recycle_view_wishlist);
         recyclerView.setHasFixedSize(true);
 
@@ -38,7 +42,6 @@ public class WishList extends AppCompatActivity {
         adapter = new WishListAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        //System.out.println(auth);
         getWishList();
 
        srlWishList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -52,7 +55,7 @@ public class WishList extends AppCompatActivity {
     }
 
     private void getWishList(){
-        Call<ArrayList<WishProduct>> call = ProductVetApiAdapter.getApiService().getWishList();
+        Call<ArrayList<WishProduct>> call = ProductVetApiAdapter.getApiService().getWishList(token);
         call.enqueue(new Callback<ArrayList<WishProduct>>() {
             @Override
             public void onResponse(Call<ArrayList<WishProduct>> call, Response<ArrayList<WishProduct>> response) {

@@ -1,6 +1,7 @@
 package com.example.babel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,6 +28,8 @@ public class Details extends AppCompatActivity {
     private ImageView imgCard;
     private TextView tvEnvio;
     int product_id;
+    private SharedPreferences preferences;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,10 @@ public class Details extends AppCompatActivity {
 
         Intent intent = getIntent();
         product_id = intent.getIntExtra("product_id", 1);
+
+        preferences = getSharedPreferences("babelapp", MODE_PRIVATE);
+        token = "Bearer "  + preferences.getString("token", null);
+        System.out.println(token);
 
         RecyclerView recyclerView = findViewById(R.id.recycle_view_details);
         recyclerView.setHasFixedSize(true);
@@ -79,7 +86,7 @@ public class Details extends AppCompatActivity {
     }
 
     private void addWishProduct(){
-        Call<Void> call = ProductVetApiAdapter.getApiService().addWishProduct(product_id);
+        Call<Void> call = ProductVetApiAdapter.getApiService().addWishProduct(product_id, token);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
