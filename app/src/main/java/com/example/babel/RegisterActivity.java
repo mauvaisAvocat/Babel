@@ -1,34 +1,27 @@
 package com.example.babel;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.babel.io.ProductVetApiAdapter;
 
-import java.util.HashMap;
-import java.util.Map;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-    private final String URL = "https://babel-tee.azurewebsites.net/api/v1/register";
 
     // Componentes de la vista de Layout
     private LinearLayout llSurname;
     private LinearLayout llPassword;
-
     private EditText etName;
     private EditText etmiddleName;
     private EditText etsurName;
@@ -39,9 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
     private Button btnBackMian;
 
-    // Componentes para conectarme remotamente a un servicio
-    private RequestQueue seryConection;
-    private StringRequest seryRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +52,6 @@ public class RegisterActivity extends AppCompatActivity {
         btnBackMian = findViewById(R.id.register);
 
         alert = new AlertDialog.Builder(RegisterActivity.this);
-        seryConection = Volley.newRequestQueue(RegisterActivity.this);
 
     }
 
@@ -71,6 +60,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void btnRegisterDB(View v) {
+        /* Variables que necesitaremos para los parámetros */
+        String name, ap, am, email, password;
+        name = etName.getText().toString();
+        ap = etmiddleName.getText().toString();
+        am = etsurName.getText().toString();
+        email = etEmail.getText().toString();
+        password = etPassword.getText().toString();
         /* Ocultamos los datos del formulario */
         etName.setVisibility(View.GONE);
         llSurname.setVisibility(View.GONE);
@@ -81,81 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setEnabled(false);
         btnBackMian.setEnabled(false);
 
-        if (etPassword.getText().toString().equals(etConfirmPass.getText().toString())) {
-            seryRequest = new StringRequest(
-                    Request.Method.POST,
-                    URL,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            alert.setTitle("Bienvenido")
-                                    .setMessage("Registro completado")
-                                    .setNeutralButton("Continuar", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            startActivity(
-                                                    new Intent(
-                                                            RegisterActivity.this,
-                                                            LoginActivity.class
-                                                    )
-                                            );
-                                        }
-                                    })
-                                    .setCancelable(false)
-                                    .setIcon(R.drawable.babellogo)
-                                    .show();
-
-                            etName.setVisibility(View.VISIBLE);
-                            llSurname.setVisibility(View.VISIBLE);
-                            etEmail.setVisibility(View.VISIBLE);
-                            llPassword.setVisibility(View.VISIBLE);
-                            btnBackMian.setEnabled(true);
-                            btnRegister.setEnabled(true);
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            /* Mostramos el error que exista */
-                            alert.setTitle("ERROR INESPERADO")
-                                    .setMessage(error.toString())
-                                    .setNeutralButton("Aceptar", null)
-                                    .setCancelable(false)
-                                    .setIcon(R.drawable.babellogo)
-                                    .show();
-                            etName.setVisibility(View.VISIBLE);
-                            llSurname.setVisibility(View.VISIBLE);
-                            etEmail.setVisibility(View.VISIBLE);
-                            llPassword.setVisibility(View.VISIBLE);
-                            btnBackMian.setEnabled(true);
-                            btnRegister.setEnabled(true);
-                        }
-                    }
-            ) {
-                /* Enviamos los parámetros a PHP con los nombres y valores que el servicio que necesite */
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    /* Usando el método put vamos a indicar las variables del servicio */
-                    params.put("name", etName.getText().toString());
-                    params.put("ap", etmiddleName.getText().toString());
-                    params.put("am", etsurName.getText().toString());
-                    params.put("email", etEmail.getText().toString());
-                    params.put("password", etPassword.getText().toString());
-                    return params;
-                }
-            };
-            /* Ejecutamos la petición desde el servidor */
-            seryConection.add(seryRequest);
-        } else {
-            etName.setText("");
-            etmiddleName.setText("");
-            etsurName.setText("");
-            etEmail.setText("");
-            etPassword.setText("");
-
-            alert.setTitle("ERROR INESPERADO")
-                    .setMessage("Las contraseñas deben de coíncidir")
+        if (password.trim().length() < 8 || etConfirmPass.getText().toString().trim().length() < 8){
+            alert.setTitle("Hey")
+                    .setMessage("Password debe contener 8 carácteres como minímo")
                     .setNeutralButton("Aceptar", null)
                     .setCancelable(false)
                     .setIcon(R.drawable.babellogo)
@@ -167,6 +91,66 @@ public class RegisterActivity extends AppCompatActivity {
             llPassword.setVisibility(View.VISIBLE);
             btnBackMian.setEnabled(true);
             btnRegister.setEnabled(true);
+            // Enviar cursor a ese campo
+            etPassword.setText("");
+            etConfirmPass.setText("");
+            etPassword.requestFocus();
+            return;
+        }
+
+        if (etPassword.getText().toString().equals(etConfirmPass.getText().toString())) {
+
+            Call<Void> call = ProductVetApiAdapter.getApiService().addRegister(name, ap, am, email, password);
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()){
+                        Toast.makeText(RegisterActivity.this, "Usuario creado exitosamente", Toast.LENGTH_SHORT).show();
+                        startActivity(
+                                new Intent(
+                                        RegisterActivity.this, LoginActivity.class
+                                )
+                        );
+                    }
+                    alert.setTitle("Hey")
+                            .setMessage("Ya esta previamente registrado ese email, ingrese uno distinto porfavor")
+                            .setNeutralButton("Aceptar", null)
+                            .setIcon(R.drawable.babellogo)
+                            .setCancelable(false)
+                            .show();
+                    etName.setVisibility(View.VISIBLE);
+                    llSurname.setVisibility(View.VISIBLE);
+                    etEmail.setVisibility(View.VISIBLE);
+                    llPassword.setVisibility(View.VISIBLE);
+                    btnBackMian.setEnabled(true);
+                    btnRegister.setEnabled(true);
+                    etEmail.setText("");
+                    etEmail.requestFocus();
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+
+                }
+            });
+        }else {
+            alert.setTitle("Hey!")
+                    .setMessage("Passwords diferentes")
+                    .setNeutralButton("Aceptar", null)
+                    .setIcon(R.drawable.babellogo)
+                    .setCancelable(false)
+                    .show();
+
+            etName.setVisibility(View.VISIBLE);
+            llSurname.setVisibility(View.VISIBLE);
+            etEmail.setVisibility(View.VISIBLE);
+            llPassword.setVisibility(View.VISIBLE);
+            btnBackMian.setEnabled(true);
+            btnRegister.setEnabled(true);
+            etPassword.setText("");
+            etConfirmPass.setText("");
+            etPassword.requestFocus();
+            return;
         }
     }
 }

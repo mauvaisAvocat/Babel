@@ -36,4 +36,12 @@ public interface ProductVetApiService {
     Call<Login> getUser(@Field("email") String email,
                         @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST("register")
+    Call<Void> addRegister(@Field("name") String name,
+                           @Field("ap") String ap,
+                           @Field("am") String am,
+                           @Field("email") String email,
+                           @Field("password") String password);
+
 }

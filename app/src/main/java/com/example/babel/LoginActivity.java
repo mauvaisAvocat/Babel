@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatActivity {
     private void getUser(){
         email = etEmail.getText().toString();
         password = etPassword.getText().toString();
-        System.out.println(email + " " + password);
         Call<Login> call = ProductVetApiAdapter.getApiService().getUser(email, password);
         call.enqueue(new Callback<Login>() {
             @Override

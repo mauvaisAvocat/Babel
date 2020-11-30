@@ -41,7 +41,7 @@ public class WishList extends AppCompatActivity {
         //System.out.println(auth);
         getWishList();
 
-        srlWishList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+       srlWishList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 srlWishList.setEnabled(false);
