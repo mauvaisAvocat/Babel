@@ -50,10 +50,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         /* Si ya existe algun valor en las preferencias locales enviamos al home */
-        //preferences = getSharedPreferences("babelapp", MODE_PRIVATE);
+        preferences = getSharedPreferences("babelapp", MODE_PRIVATE);
 
         /* Sino tenemos el valor de las preferencias, debemos indicar cual será el valor defecto */
-        /*int id = preferences.getInt("id", 0);
+        int id = preferences.getInt("id", 0);
         String token = preferences.getString("token", null);
         if (id != 0 && token != null){
             startActivity(
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                             LoginActivity.this, MainActivity.class
                     )
             );
-        }*/
+        }
     }
 
     private void getUser(){
@@ -74,9 +74,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Login user = response.body();
                     /* Guardamos las preferencias de manera local
-                    * Las preferencias se guardan en un espacio de trabajo
-                    * 1. Nombre del espacio de trabajo
-                    * 2. Modo de uso (privado/ publico/ compartido) */
+                     * Las preferencias se guardan en un espacio de trabajo
+                     * 1. Nombre del espacio de trabajo
+                     * 2. Modo de uso (privado/ publico/ compartido) */
                     preferences = getSharedPreferences("babelapp", MODE_PRIVATE);
                     /* Editamos las preferencias dentro de mi espacio */
                     preferencesEditor = preferences.edit();
@@ -86,7 +86,8 @@ public class LoginActivity extends AppCompatActivity {
                     /* Escribimos los cambios en el archivo de configuración */
                     preferencesEditor.commit();
                     alert.setTitle("WTF")
-                            .setMessage(user.toString())
+                            .setMessage("Bienvenid@: " + user.getName())
+                            .setIcon(R.drawable.babellogo)
                             .setNeutralButton("Aceptar", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -98,6 +99,17 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             })
                             .show();
+                }else{
+                    alert.setTitle("WTF")
+                            .setMessage("El correo o contraseña son incorrectos")
+                            .setIcon(R.drawable.babellogo)
+                            .setNeutralButton("Aceptar", null)
+                            .setCancelable(false)
+                            .show();
+
+                    etEmail.setText("");
+                    etPassword.setText("");
+                    etEmail.requestFocus();
                 }
             }
 

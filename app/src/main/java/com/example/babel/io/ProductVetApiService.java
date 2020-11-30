@@ -47,4 +47,7 @@ public interface ProductVetApiService {
                            @Field("email") String email,
                            @Field("password") String password);
 
+    @POST("logout")
+    Call<Void> logoutUser(@Header("Authorization") String token);
+
 }
