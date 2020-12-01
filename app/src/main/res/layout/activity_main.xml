@@ -44,38 +44,50 @@
                     app:layout_constraintTop_toBottomOf="@+id/babelLogo" />
 
             <LinearLayout
+                    android:paddingStart="16dp"
                     android:id="@+id/loginContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:background="@color/mediumGray"
                     app:layout_constraintTop_toBottomOf="@+id/search">
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.20"
+                        android:src="@drawable/banner"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="8dp"
+                        android:layout_marginTop="0dp"
+                        android:contentDescription="@string/user_profile_photo" />
+                <TextView
+                        android:id="@+id/loginmainButton"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:textSize="19sp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="0.45"
+                        android:background="@color/mediumGray"
+                        android:enabled="true"
+                        android:onClick="btnMainLogout"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="8dp"
+                        android:text="{{ userName }}"
+                        android:textColor="@color/black" />
 
                 <Button
                         android:id="@+id/logoutButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="0.5"
-                        android:background="@color/mediumGray"
-                        android:enabled="true"
-                        android:onClick="btnMainLogout"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="8dp"
-                        android:text="Logout"
-                        android:textColor="@color/black" />
-
-                <Button
-                        android:id="@+id/loginButton"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="0.5"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="0.35"
                         android:background="@color/mediumGray"
                         android:enabled="true"
                         android:onClick="btnMainLogin"
-                        android:paddingStart="8dp"
+                        android:paddingStart="0dp"
                         android:paddingEnd="8dp"
-                        android:text="@string/action_sign_in"
+                        android:text="@string/cerrar_sesi_n"
                         android:textColor="@color/black" />
             </LinearLayout>
 

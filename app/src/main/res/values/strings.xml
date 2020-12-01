@@ -33,6 +33,8 @@
     <string name="m_s">Más</string>
     <string name="peos">$</string>
     <string name="nombre">_NOMBRE_</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
+    <string name="user_profile_photo">User profile photo</string>
 
     <string-array name="sizes_array">
         <item>CH</item>
