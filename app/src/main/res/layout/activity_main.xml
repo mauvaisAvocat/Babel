@@ -51,17 +51,20 @@
                     android:orientation="horizontal"
                     android:background="@color/mediumGray"
                     app:layout_constraintTop_toBottomOf="@+id/search">
-                <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.20"
-                        android:src="@drawable/banner"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="8dp"
-                        android:layout_marginTop="0dp"
-                        android:contentDescription="@string/user_profile_photo" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/img_profile"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.20"
+                    android:src="@drawable/banner"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/black"
+                    android:scaleType="centerCrop"/>
+
                 <TextView
-                        android:id="@+id/loginmainButton"
+                        android:id="@+id/username_main"
                         android:layout_width="0dp"
                         android:gravity="center"
                         android:textSize="19sp"
@@ -70,7 +73,6 @@
                         android:layout_weight="0.45"
                         android:background="@color/mediumGray"
                         android:enabled="true"
-                        android:onClick="btnMainLogout"
                         android:paddingStart="0dp"
                         android:paddingEnd="8dp"
                         android:text="{{ userName }}"
@@ -84,7 +86,7 @@
                         android:layout_weight="0.35"
                         android:background="@color/mediumGray"
                         android:enabled="true"
-                        android:onClick="btnMainLogin"
+                        android:onClick="btnMainLogout"
                         android:paddingStart="0dp"
                         android:paddingEnd="8dp"
                         android:text="@string/cerrar_sesi_n"
@@ -199,6 +201,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@android:color/transparent"
                                 android:enabled="true"
+                                android:onClick="btnAddWL"
                                 android:paddingStart="8dp"
                                 android:paddingEnd="8dp"
                                 android:text="@string/agregar_al_wish_list"

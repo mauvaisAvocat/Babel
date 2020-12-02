@@ -111,6 +111,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
                                             );
                                         }
                                     })
+                                    .setNegativeButton("No", null)
                                     .setCancelable(false)
                                     .show();
                         }

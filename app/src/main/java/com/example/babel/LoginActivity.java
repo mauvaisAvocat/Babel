@@ -83,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                     /* Agregamos el id y token del usuario en nuestro espacio de variables */
                     preferencesEditor.putInt("id", user.getId());
                     preferencesEditor.putString("token", user.getToken());
+                    preferencesEditor.putString("name", user.getName());
+                    preferencesEditor.putString("profilePicture", user.getProfilePicture());
                     /* Escribimos los cambios en el archivo de configuración */
                     preferencesEditor.commit();
                     alert.setTitle("WTF")
@@ -92,9 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     startActivity(
-                                            new Intent(
-                                                    LoginActivity.this, MainActivity.class
-                                            )
+                                            new Intent(LoginActivity.this, MainActivity.class)
                                     );
                                 }
                             })
