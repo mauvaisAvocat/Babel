@@ -50,4 +50,10 @@ public interface ProductVetApiService {
     @POST("logout")
     Call<Void> logoutUser(@Header("Authorization") String token);
 
+    @GET("wishlist/reset")
+    Call<Void> emptywishlist(@Header("Authorization") String token);
+
+    @GET("search?search={product}")
+    Call<ArrayList<ProductList>> getsearch(@Path("product") String product);
+
 }

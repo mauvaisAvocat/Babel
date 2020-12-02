@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog.Builder alert;
     private CircleImageView circleImageView;
     private TextView tvUserName;
+    private EditText etSearch;
     //private ImageView imageView;
 
     @Override
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         circleImageView = findViewById(R.id.img_profile);
         //imageView = findViewById(R.id.img_main);
         tvUserName = findViewById(R.id.username_main);
+        etSearch = findViewById(R.id.search);
         tvUserName.setText(name);
         Picasso.get()
                 .load(profilePicture)
@@ -89,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void sendSearch(View v){
+        Intent i = new Intent(MainActivity.this, SearchActivity.class);
+        i.putExtra("product", etSearch.getText().toString());
+        startActivity(i);
+    }
+
     public void btnDetailsProducts(View v) {
         Intent i = new Intent(MainActivity.this, Details.class);
         i.putExtra("product_id", 8);
@@ -106,7 +115,9 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(MainActivity.this, "Se ha añadido a wishlist", Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful()){
+                    Toast.makeText(MainActivity.this, "Se ha añadido a wishlist", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
