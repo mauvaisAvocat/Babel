@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                                     );
                                 }
                             })
-                            .setNegativeButton("No", null)
+                            .setNegativeButton("Cancelar", null)
                             .show();
                 }
             }

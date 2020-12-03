@@ -14,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ProductVetApiService {
 
@@ -53,7 +54,7 @@ public interface ProductVetApiService {
     @GET("wishlist/reset")
     Call<Void> emptywishlist(@Header("Authorization") String token);
 
-    @GET("search?search={product}")
-    Call<ArrayList<ProductList>> getsearch(@Path("product") String product);
+    @GET("search?")
+    Call<ArrayList<ProductList>> getSearch(@Query("search") String product);
 
 }
